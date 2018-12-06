@@ -1,0 +1,33 @@
+@startuml
+interface List<E> extends Collection
+abstract class AbstractCollection<E> implements Collection
+abstract class AbstractList<E> extends AbstractCollection implements List
+class ArrayList<E> extends AbstractList implements List
+class LinkedList<E> extends AbstractSequentialList implements List,Deque
+abstract class AbstractSequentialList<E> extends AbstractList
+interface Deque<E> extends Queue
+class Vector extends AbstractList implements List
+class HashSet extends AbstractSet implements Set
+abstract class AbstractSet extends AbstractCollection implements Set
+interface Queue<E> extends Collection
+interface Set<E> extends Collection
+class TreeSet<E> extends AbstractSet implements NavigableSet
+interface NavigableSet<E> extends SortedSet
+interface SortedSet<E> extends Set
+
+class HashMap<K,V> extends AbstractMap implements Map
+abstract class AbstractMap<K,V> implements Map
+class TreeMap extends AbstractMap implements NavigableMap
+interface NavigableMap<K,V> extends SortedMap
+interface SortedMap<K,V> extends Map
+class WeakHashMap  extends AbstractMap  implements Map
+class Hashtable implements Map
+Hashtable -up-|> Dictionary
+abstract class Dictionary
+class LinkedHashMap extends HashMap  implements Map
+
+namespace 工具类 #red{
+    class Arrays
+    class Collections
+}
+@enduml

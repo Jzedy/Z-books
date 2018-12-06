@@ -1,0 +1,66 @@
+@startuml
+
+interface Collection
+interface Map
+interface SortedMap
+interface NavigableMap
+interface Queue
+interface Deque
+interface List
+interface Set
+interface SortedSet
+interface NavigableSet
+
+'abstract class Dictionary
+abstract class AbstractMap
+abstract class AbstractCollection
+abstract class AbstractList
+abstract class AbstractSequentialList
+abstract class AbstractSet
+
+class Hashtable
+class WeakHashMap
+class TreeMap
+class HashMap
+class LinkedHashMap
+class LinkedList
+class ArrayList
+class Vector
+class HashSet
+class TreeSet
+
+Queue -up-|> Collection
+List -up-|> Collection
+Set -up-|> Collection
+AbstractCollection .up.>Collection
+LinkedList -up-|>AbstractSequentialList
+LinkedList .up.|> Deque
+Deque -up-|> Queue
+AbstractSequentialList -left-|> AbstractList
+AbstractList .up.|>List
+AbstractList -up-|>AbstractCollection
+ArrayList .up.|>AbstractList
+Vector -up-|> AbstractList
+SortedSet -up-|>Set
+AbstractSet -up-|>AbstractCollection
+AbstractSet -up-|>Set
+NavigableSet -up-|>SortedSet
+TreeSet .up.|>NavigableSet
+HashSet -up-|>AbstractSet
+
+SortedMap -up-|>Map
+AbstractMap .up.|>Map
+Hashtable .up.|> Map
+HashMap -up-|> AbstractMap
+WeakHashMap -up-|> AbstractMap
+NavigableMap -up-|> SortedMap
+TreeMap .up.|> NavigableMap
+TreeMap -up-|> AbstractMap
+LinkedHashMap-up-|>HashMap
+
+namespace 工具类 #red{
+    class Arrays
+    class Collections
+}
+
+@enduml
