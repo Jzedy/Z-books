@@ -39,14 +39,15 @@ Deque -up-|> Queue
 AbstractSequentialList -left-|> AbstractList
 AbstractList .up.|>List
 AbstractList -up-|>AbstractCollection
-ArrayList .up.|>AbstractList
+ArrayList -up-|>AbstractList
 Vector -up-|> AbstractList
 SortedSet -up-|>Set
 AbstractSet -up-|>AbstractCollection
-AbstractSet -up-|>Set
+AbstractSet .up.|>Set
 NavigableSet -up-|>SortedSet
 TreeSet .up.|>NavigableSet
-HashSet -up-|>AbstractSet
+TreeSet -up-|>AbstractSet
+HashSet -left-|>AbstractSet
 
 SortedMap -up-|>Map
 AbstractMap .up.|>Map
