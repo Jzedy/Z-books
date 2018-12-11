@@ -1,4 +1,4 @@
-# selfwrite
+> 个人博客与学习总结
 # Java集合
 1. [Java集合-01概述](https://github.com/Jzedy/selfwrite/blob/master/src/main/doc/baseJava/collections/Java%E9%9B%86%E5%90%88-01%E6%A6%82%E8%BF%B0.md)
 2. [Java集合-02集合抽象类](https://github.com/Jzedy/Z-books/blob/master/src/main/doc/baseJava/collections/Java%E9%9B%86%E5%90%88-02Collection.md)
