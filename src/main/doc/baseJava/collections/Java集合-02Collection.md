@@ -87,7 +87,7 @@ public interface Queue<E> extends Collection<E>{
     E peek();
 }
 ```
->Queue实在java5添加的，用于支持队列的常见操作，队列的一个特性为先进先出，即先添加的元素是最先被删除的元素。
+>Queue是在java5添加的，用于支持队列的常见操作，队列的一个特性为先进先出，即先添加的元素是最先被删除的元素。
 拓展了Collection接口，add和offer方法添加元素，不同的是
 add方法添加失败会抛出异常，故添加元素时候优先选择offer方法；
 remove和poll方法为移除元素，同样的优先使用poll方法，如果为空队列时候，
