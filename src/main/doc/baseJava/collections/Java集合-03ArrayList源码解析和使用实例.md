@@ -71,7 +71,7 @@ private void grow(int minCapacity) {
     }
 ```
 
-通过阅读上面的源码可以看出ArrayList每次添加元素时候都会检查容量是否够，如果不够的话，需要扩容；
+>通过阅读上面的源码可以看出ArrayList每次添加元素时候都会检查容量是否够，如果不够的话，需要扩容；
 例如size=10，elementData.length=10，此时底层数组元素填充满了  当再次添加元素时候ensureCapacityInternal(size + 1)方法
 为ensureCapacityInternal(11)->ensureExplicitCapacity(11)->grow(11)返回16，这也是为什么说每次扩容都是(size+1)的1.5倍
 
