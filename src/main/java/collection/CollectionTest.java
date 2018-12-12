@@ -4,6 +4,7 @@ import org.junit.Before;
 import org.junit.Test;
 
 import java.util.ArrayList;
+import java.util.LinkedList;
 import java.util.List;
 
 /**
@@ -17,14 +18,17 @@ public class CollectionTest {
 
     @Before
     public void before(){
-        list = new ArrayList<>(4);
-        list.add("a");
+        list = new LinkedList<>();
         list.add("b");
+        list.add("a");
         list.add("c");
     }
 
     @Test
     public void arrayTest(){
         System.out.println(list.get(1));
+        for (int i = 0; i<list.size();i++){
+            System.out.println(list.get(i));
+        }
     }
 }
