@@ -50,7 +50,7 @@ private static class Node<E> {
 > 链表节点Node：LinkedList内部类Node代表的就是节点信息，
 item表示的是我们存储在链表当前位置的数据，next记录的是下一个节点指向，
 prev记录的是上一个节点指向，这样俯视看LinkedList就会像下面图
-[Node图](../../../image/Node.png)
+![Node图](https://github.com/Jzedy/Z-books/blob/master/src/main/image/Node.png?raw=true)
 
 ### 添加元素
 ```
