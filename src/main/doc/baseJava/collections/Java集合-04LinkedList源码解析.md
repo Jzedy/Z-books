@@ -28,7 +28,7 @@ public class LinkedList<E>
 它通过判断链表的节点next属性判断是否还有下一个节点，增加删除都是针对节点prev和next属性；
 
 ## 结构分析
-![LinkedList结构图](https://github.com/Jzedy/Z-books/blob/master/src/main/image/arrayList.png?raw=true)
+![LinkedList结构图](https://github.com/Jzedy/Z-books/blob/master/src/main/image/LinkedList.png?raw=true)
 > 从结构图可以看出LinkedList有三个属性，size：LinkedList大小，
 first：LinkedList的第一个节点，last：LinkedList最后一个节点
 
