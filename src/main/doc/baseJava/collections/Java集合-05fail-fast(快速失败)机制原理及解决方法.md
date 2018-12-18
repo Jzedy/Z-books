@@ -138,4 +138,5 @@ checkForComodification()方法检测两个的值不相等就抛出异常
       }
     ```
 - 多线程
-    使用使用java并发包下的类来代替对应的集合
+    使用java并发包下的类来代替对应的集合,如CopyOnWriteArrayList代替ArrayList，
+    
