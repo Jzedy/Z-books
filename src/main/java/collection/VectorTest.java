@@ -21,6 +21,9 @@ public class VectorTest {
         }
     }
 
+    /**
+     * 迭代器遍历
+     */
     @Test
     public void iterT(){
         long start = System.currentTimeMillis();
@@ -32,6 +35,9 @@ public class VectorTest {
         System.out.println("iterator cost:"+(end-start));
     }
 
+    /**
+     * forEach遍历
+     */
     @Test
     public void foreachT(){
         long start = System.currentTimeMillis();
@@ -42,6 +48,9 @@ public class VectorTest {
         System.out.println("forEach cost:"+(end-start));
     }
 
+    /**
+     * RandomAccess遍历
+     */
     @Test
     public void randomT(){
         long start = System.currentTimeMillis();
@@ -52,6 +61,9 @@ public class VectorTest {
         System.out.println("random cost:"+(end-start));
     }
 
+    /**
+     * Enumeration遍历
+     */
     @Test
     public void enumT(){
         long start = System.currentTimeMillis();
