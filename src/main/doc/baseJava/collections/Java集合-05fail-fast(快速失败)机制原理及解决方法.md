@@ -117,7 +117,7 @@ checkForComodification()方法检测两个的值不相等就抛出异常
 
 ## 解决方法
 - 单线程
-    使用迭代器的remove方法
+    - 使用迭代器的remove方法
     ```java
       public class NoFailFastSingleThread {
           public static void main(String[] args) {
@@ -138,5 +138,5 @@ checkForComodification()方法检测两个的值不相等就抛出异常
       }
     ```
 - 多线程
-    使用java并发包下的类来代替对应的集合,如CopyOnWriteArrayList代替ArrayList，
+    - 使用java并发包下的类来代替对应的集合,如CopyOnWriteArrayList代替ArrayList，
     
