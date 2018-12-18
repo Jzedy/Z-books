@@ -1,4 +1,4 @@
-# Java集合-06Vector源码解析
+# Java集合-06Vector源码解析及使用实例
 
 ## Vector简介
 > Vector (矢量类)实现了动态数组的功能，如同数组，它可以通过角标访问数据，
@@ -28,7 +28,7 @@ public synchronized boolean add(E e) {
         return true;//返回布尔类型
     }
 ``` 
->![fail-fast(快速失败)机制](https://github.com/Jzedy/Z-books/blob/master/src/main/doc/baseJava/collections/Java%E9%9B%86%E5%90%88-05fail-fast(%E5%BF%AB%E9%80%9F%E5%A4%B1%E8%B4%A5)%E6%9C%BA%E5%88%B6%E5%8E%9F%E7%90%86%E5%8F%8A%E8%A7%A3%E5%86%B3%E6%96%B9%E6%B3%95.md)
+>[fail-fast(快速失败)机制](https://github.com/Jzedy/Z-books/blob/master/src/main/doc/baseJava/collections/Java%E9%9B%86%E5%90%88-05fail-fast(%E5%BF%AB%E9%80%9F%E5%A4%B1%E8%B4%A5)%E6%9C%BA%E5%88%B6%E5%8E%9F%E7%90%86%E5%8F%8A%E8%A7%A3%E5%86%B3%E6%96%B9%E6%B3%95.md)
 ```
 private void ensureCapacityHelper(int minCapacity) {
         // overflow-conscious code
@@ -96,3 +96,4 @@ public synchronized E remove(int index) {
         }
         ```
 
+[Vector使用实例](https://github.com/Jzedy/Z-books/blob/master/src/main/java/collection/VectorTest.java)
