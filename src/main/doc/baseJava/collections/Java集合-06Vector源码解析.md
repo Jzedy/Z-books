@@ -96,4 +96,5 @@ public synchronized E remove(int index) {
         }
         ```
 
-[Vector使用实例](https://github.com/Jzedy/Z-books/blob/master/src/main/java/collection/VectorTest.java)
+## Vector使用实例
+>使用实例代码在[Github](https://github.com/Jzedy/Z-books/blob/master/src/main/java/collection/VectorTest.java)上
