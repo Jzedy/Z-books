@@ -9,3 +9,4 @@
 
 # MySQL
 1. [mysql从入门到精通01](https://github.com/Jzedy/selfwrite/blob/master/src/main/doc/sql/mysql%E5%85%A5%E9%97%A8%E5%88%B0%E7%B2%BE%E9%80%9A01.md)
+2. [mysql从入门到精通02](https://github.com/Jzedy/Z-books/blob/master/src/main/doc/sql/mysql%E5%85%A5%E9%97%A8%E5%88%B0%E7%B2%BE%E9%80%9A02.md)
