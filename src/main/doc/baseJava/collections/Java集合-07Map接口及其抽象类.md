@@ -17,7 +17,7 @@
 4. NavigableMap
     >在SortedMap接口上拓展了一系列的导航方法
 5. HashMap
-    >基于hash表实现，key和value都允许null，非同步的切不能保证排序
+    >基于hash表实现，key和value都允许null，非同步的且不能保证排序
 6. WeakHashMap
     > 和HashMap类似，不过它的键是"弱键"
 7. LinkedHashMap
@@ -79,8 +79,8 @@ public interface Map<K,V>{
 > 提供了Map接口的骨架实现，对于开发一个不可变的map，开发者只需要继承这个类且提供entrySet方法的实现，
 通常entrySet方法返回的Set在AbstractSet上实现，该set不应该支持add()或者remove()方法，并且它的迭代器不支持remove()方法。
 要开发一个可变的Map，开发者继承这个类提供entrySet方法的实现外还额外需要put方法，
-不然会报UnsupportedOperationException(因为AbstractMap的put方法只是抛出了UnsupportedOperationException，如果你
-想开发一个可变的Map，使用put方法是需要重写的)；并且entrySet().iterator()返回的迭代器必须实现它的remove方法()
+不然会报UnsupportedOperationException(因为AbstractMap的put方法只是抛出了UnsupportedOperationException,
+如果你想开发一个可变的Map，使用put方法是需要重写的)；并且entrySet().iterator()返回的迭代器必须实现它的remove方法()
 
 ### SortedMap
 > SortedMap接口继承Map接口，为一个有序的键值对映射。
