@@ -28,4 +28,7 @@ HashMap的两个因素。容量表示hash表中桶(buckets)的数量，初始容
 4. public HashMap(Map<? extends K, ? extends V> m)
     >定义一个初始容量为不小于(m.size()/0.75+1)的2的最小指数，加载因子为0.75,包含了m中映射关系的HashMap
 
-## HashMap
+## HashMap 结构图
+![HashMap结构图](../../../image/HashMap.png)
+
+>
