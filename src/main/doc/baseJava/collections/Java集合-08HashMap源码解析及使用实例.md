@@ -117,3 +117,31 @@ final V putVal(int hash, K key, V value, boolean onlyIfAbsent,
     return null;
 }
 ```
+- get方法
+```
+public V get(Object key) {
+    Node<K,V> e;
+    return (e = getNode(hash(key), key)) == null ? null : e.value;
+}
+
+final Node<K,V> getNode(int hash, Object key) {
+    Node<K,V>[] tab; Node<K,V> first, e; int n; K k;
+    if ((tab = table) != null && (n = tab.length) > 0 &&
+        (first = tab[(n - 1) & hash]) != null) {//hash表存在且长度大于0且对应的key定位的桶不为null
+        if (first.hash == hash && // always check first node
+            ((k = first.key) == key || (key != null && key.equals(k))))
+            return first;//第一个节点符合 返回第一个
+        if ((e = first.next) != null) {//第一个不符合，如果链表还有下一个节点 
+            if (first instanceof TreeNode)//为红黑树结构
+                return ((TreeNode<K,V>)first).getTreeNode(hash, key);//按照红黑树结构查找
+            do {//遍历链表，查询hash 和equals相等的，有则返回，一直到链尾
+                if (e.hash == hash &&
+                    ((k = e.key) == key || (key != null && key.equals(k))))
+                    return e;
+            } while ((e = e.next) != null);
+        }
+    }
+    return null;
+}
+
+```

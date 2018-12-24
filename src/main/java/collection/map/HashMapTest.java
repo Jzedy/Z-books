@@ -18,6 +18,13 @@ public class HashMapTest {
     }
 
     @Test
+    public void equalkey(){
+        ForKey jzedy = new ForKey("jzedy");
+        ForKey jzedy2 = new ForKey("jzedy");
+        System.out.println(jzedy.equals(jzedy2));
+    }
+
+    @Test
     public void mapForKey(){
         HashMap<ForKey, String> map = new HashMap<>();
         map.put(new ForKey("jzedy"),"S");
