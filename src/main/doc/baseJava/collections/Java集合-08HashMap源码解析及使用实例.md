@@ -117,6 +117,30 @@ final V putVal(int hash, K key, V value, boolean onlyIfAbsent,
     return null;
 }
 ```
+>put流程
+
+>1.通过hash函数计算key的hash值，调用putVal方法
+ 
+> 2.如果hash表为空，调用resize()方法创建一个hash表
+ 
+> 3.根据hash值索引hash表对应桶位置，判断该位置是否有hash碰撞
+
+   >> 3.1 没有碰撞，直接插入映射入hash表
+   
+   >> 3.2 有碰撞，遍历桶中节点
+   
+   >>> 3.2.1 第一个节点匹配，记录该节点
+   
+   >>> 3.2.2 第一个节点没有匹配，桶中结构为红黑树结构，按照红黑树结构添加数据，记录返回值
+   
+   >>> 3.2.3 第一个节点没有匹配，桶中结构是链表结构。遍历链表，找到key映射节点，记录，退出循环。
+   没有则在链表尾部添加节点。插入后判断链表长度是否大于转换为红黑树要求，符合则转为红黑树结构
+   
+   >>>3.2.4 用于记录的值判断是否为null，不为则是需要插入的映射key在hash表中原来有，替换值，返回旧值putValue方法结束
+   
+>4.结构性修改记录，判断是否需要扩容
+ 
+
 - get方法
 ```
 public V get(Object key) {
@@ -144,4 +168,73 @@ final Node<K,V> getNode(int hash, Object key) {
     return null;
 }
 
+```
+
+
+
+- 修改方法
+
+```
+public V replace(K key, V value) {
+    Node<K,V> e;
+    if ((e = getNode(hash(key), key)) != null) {//根据key查询  有则修改
+        V oldValue = e.value;
+        e.value = value;
+        afterNodeAccess(e);
+        return oldValue;
+    }
+    return null;
+}
+
+
+```
+
+- remove方法
+```
+public V remove(Object key) {
+    Node<K,V> e;
+    return (e = removeNode(hash(key), key, null, false, true)) == null ?
+        null : e.value;
+}
+
+final Node<K,V> removeNode(int hash, Object key, Object value,
+                           boolean matchValue, boolean movable) {
+    Node<K,V>[] tab; Node<K,V> p; int n, index;
+    if ((tab = table) != null && (n = tab.length) > 0 &&
+        (p = tab[index = (n - 1) & hash]) != null) {//hash表存在且长度大于0且对应的key定位的桶不为null
+        Node<K,V> node = null, e; K k; V v;
+        if (p.hash == hash &&
+            ((k = p.key) == key || (key != null && key.equals(k))))
+            node = p;//判断第一个节点，符合记录
+        else if ((e = p.next) != null) {//第一个节点不符合
+            if (p instanceof TreeNode)//判断是否为红黑树结构
+                node = ((TreeNode<K,V>)p).getTreeNode(hash, key);
+            else {//为链表结构，遍历
+                do {
+                    if (e.hash == hash &&
+                        ((k = e.key) == key ||
+                         (key != null && key.equals(k)))) {
+                        node = e;
+                        break;
+                    }
+                    p = e;
+                } while ((e = e.next) != null);
+            }
+        }
+        if (node != null && (!matchValue || (v = node.value) == value ||
+                             (value != null && value.equals(v)))) {//判断是否符合有要移除的node
+            if (node instanceof TreeNode)//为红黑树结构
+                ((TreeNode<K,V>)node).removeTreeNode(this, tab, movable);
+            else if (node == p)//第一个节点就是符合的
+                tab[index] = node.next;//删除第一个节点(第一个节点指向null，或者指向原来第二个节点)
+            else
+                p.next = node.next;//链表结构，指向后面的一个节点
+            ++modCount;
+            --size;
+            afterNodeRemoval(node);
+            return node;
+        }
+    }
+    return null;
+}
 ```

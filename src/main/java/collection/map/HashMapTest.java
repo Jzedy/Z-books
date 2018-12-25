@@ -29,6 +29,7 @@ public class HashMapTest {
         HashMap<ForKey, String> map = new HashMap<>();
         map.put(new ForKey("jzedy"),"S");
         map.put(new ForKey("test"),"S");
+        map.put(new ForKey("test2"),"S");
         System.out.println(map.get(new ForKey("jzedy")));
     }
 
@@ -56,6 +57,9 @@ class ForKey{
 
     @Override
     public boolean equals(Object obj) {
-        return name.equals(obj);
+        if (obj instanceof ForKey){
+            return this.name.equals(((ForKey) obj).name);
+        }
+        return false;
     }
 }
