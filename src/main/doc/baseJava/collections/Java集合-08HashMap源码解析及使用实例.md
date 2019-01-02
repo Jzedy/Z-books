@@ -319,3 +319,33 @@ final Node<K,V> removeNode(int hash, Object key, Object value,
     return null;
 }
 ```
+
+
+## HashMap遍历
+
+- 遍历HashMap键值对
+>根据map.entrySet()获得键值对Set集合，后续遍历
+
+```
+for (Map.Entry<Integer, String> entry : maps.entrySet()) {
+    System.out.println(entry.getKey()+":"+entry.getValue());
+}
+```
+
+- 遍历HashMap的键视图
+> 根据maps.keySet()获得HashMap的键的Set集合，后续遍历
+
+```
+for (Integer integer : maps.keySet()) {
+    System.out.println(integer);
+}
+```
+
+- 遍历HashMap的值视图
+> 根据maps.values()获得HashMap的键的Collection集合，后续遍历
+
+```
+for (String value : maps.values()) {
+    System.out.println(value);
+}
+```

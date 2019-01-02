@@ -41,6 +41,24 @@ public class HashMapTest {
         map.put("4","fsad");
         Map newMap = new HashMap(map);
     }
+
+    @Test
+    public void mapEntryForeach(){
+        Map<Integer,String> maps = new HashMap<>(8);
+        maps.put(1,"a");
+        maps.put(2,"a");
+        maps.put(3,"a");
+
+        for (Map.Entry<Integer, String> entry : maps.entrySet()) {
+            System.out.println(entry.getKey()+":"+entry.getValue());
+        }
+        for (Integer integer : maps.keySet()) {
+            System.out.println(integer);
+        }
+        for (String value : maps.values()) {
+            System.out.println(value);
+        }
+    }
 }
 
 class ForKey{
