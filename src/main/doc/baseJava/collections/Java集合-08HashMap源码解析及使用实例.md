@@ -71,11 +71,11 @@ final Node<K,V>[] resize() {
     int oldCap = (oldTab == null) ? 0 : oldTab.length;
     int oldThr = threshold;
     int newCap, newThr = 0;
-    if (oldCap > 0) {//
+    if (oldCap > 0) {//超过最大值，后续不再扩容
         if (oldCap >= MAXIMUM_CAPACITY) {
             threshold = Integer.MAX_VALUE;
             return oldTab;
-        }
+        }//没有超过最大值，容量扩大一倍
         else if ((newCap = oldCap << 1) < MAXIMUM_CAPACITY &&
                  oldCap >= DEFAULT_INITIAL_CAPACITY)
             newThr = oldThr << 1; // double threshold
@@ -86,7 +86,7 @@ final Node<K,V>[] resize() {
         newCap = DEFAULT_INITIAL_CAPACITY;
         newThr = (int)(DEFAULT_LOAD_FACTOR * DEFAULT_INITIAL_CAPACITY);
     }
-    if (newThr == 0) {
+    if (newThr == 0) {//设置扩容阙值
         float ft = (float)newCap * loadFactor;
         newThr = (newCap < MAXIMUM_CAPACITY && ft < (float)MAXIMUM_CAPACITY ?
                   (int)ft : Integer.MAX_VALUE);
@@ -95,7 +95,7 @@ final Node<K,V>[] resize() {
     @SuppressWarnings({"rawtypes","unchecked"})
         Node<K,V>[] newTab = (Node<K,V>[])new Node[newCap];
     table = newTab;
-    if (oldTab != null) {
+    if (oldTab != null) {//原来的数据移动到新的容器里面
         for (int j = 0; j < oldCap; ++j) {
             Node<K,V> e;
             if ((e = oldTab[j]) != null) {
