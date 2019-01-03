@@ -1,4 +1,4 @@
-# Java集合-08LinkedHashMap源码解析及使用实例
+# Java集合-09LinkedHashMap源码解析及使用实例
 
 ## LinkedHashMap 简介
 > hash表和链表实现了map接口，迭代顺序是可以预测的。LinkedHashMap和HashMap的不同是它所有的entry
