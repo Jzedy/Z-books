@@ -34,20 +34,22 @@ public class HashMapTest {
     }
 
     public static void main(String[] args) {
-        HashMap map = new HashMap(10);
+        HashMap<String,String> map = new HashMap(10);
         map.put("1","fsad");
         map.put("2","fsad");
-        map.put("3","fsad");
         map.put("4","fsad");
-        Map newMap = new HashMap(map);
+        map.put("3","fsad");
+        for (Map.Entry<String, String> entry : map.entrySet()) {
+            System.out.println(entry.getKey()+":"+entry.getValue());
+        }
     }
 
     @Test
     public void mapEntryForeach(){
         Map<Integer,String> maps = new HashMap<>(8);
         maps.put(1,"a");
-        maps.put(2,"a");
         maps.put(3,"a");
+        maps.put(2,"a");
 
         for (Map.Entry<Integer, String> entry : maps.entrySet()) {
             System.out.println(entry.getKey()+":"+entry.getValue());
