@@ -8,6 +8,7 @@
 6. [Java集合-06Vector源码解析及使用实例](https://github.com/Jzedy/Z-books/blob/master/src/main/doc/baseJava/collections/Java%E9%9B%86%E5%90%88-06Vector%E6%BA%90%E7%A0%81%E8%A7%A3%E6%9E%90.md)
 7. [Java集合-07Map接口及其抽象类](https://github.com/Jzedy/Z-books/blob/master/src/main/doc/baseJava/collections/Java%E9%9B%86%E5%90%88-07Map%E6%8E%A5%E5%8F%A3%E5%8F%8A%E5%85%B6%E6%8A%BD%E8%B1%A1%E7%B1%BB.md)
 8. [Java集合-08HashMap源码解析及使用实例](https://github.com/Jzedy/Z-books/blob/master/src/main/doc/baseJava/collections/Java%E9%9B%86%E5%90%88-08HashMap%E6%BA%90%E7%A0%81%E8%A7%A3%E6%9E%90%E5%8F%8A%E4%BD%BF%E7%94%A8%E5%AE%9E%E4%BE%8B.md)
+9. [Java集合-09LinkedHashMap源码解析及使用实例](https://github.com/Jzedy/Z-books/blob/master/src/main/doc/baseJava/collections/Java%E9%9B%86%E5%90%88-09LinkedHashMap%E6%BA%90%E7%A0%81%E8%A7%A3%E6%9E%90%E5%8F%8A%E4%BD%BF%E7%94%A8%E5%AE%9E%E4%BE%8B.md)
 
 # MySQL
 1. [mysql从入门到精通01](https://github.com/Jzedy/selfwrite/blob/master/src/main/doc/sql/mysql%E5%85%A5%E9%97%A8%E5%88%B0%E7%B2%BE%E9%80%9A01.md)
