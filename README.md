@@ -10,6 +10,11 @@
 8. [Java集合-08HashMap源码解析及使用实例](https://github.com/Jzedy/Z-books/blob/master/src/main/doc/baseJava/collections/Java%E9%9B%86%E5%90%88-08HashMap%E6%BA%90%E7%A0%81%E8%A7%A3%E6%9E%90%E5%8F%8A%E4%BD%BF%E7%94%A8%E5%AE%9E%E4%BE%8B.md)
 9. [Java集合-09LinkedHashMap源码解析及使用实例](https://github.com/Jzedy/Z-books/blob/master/src/main/doc/baseJava/collections/Java%E9%9B%86%E5%90%88-09LinkedHashMap%E6%BA%90%E7%A0%81%E8%A7%A3%E6%9E%90%E5%8F%8A%E4%BD%BF%E7%94%A8%E5%AE%9E%E4%BE%8B.md)
 
+
+#框架
+## mybatis
+1. [mybatis-plus 代码生成](https://github.com/Jzedy/Z-books/blob/master/src/main/doc/frame/mybatis/mybatis-plus%E4%BB%A3%E7%A0%81%E7%94%9F%E6%88%90.md) 
+
 # MySQL
 1. [mysql从入门到精通01](https://github.com/Jzedy/selfwrite/blob/master/src/main/doc/sql/mysql%E5%85%A5%E9%97%A8%E5%88%B0%E7%B2%BE%E9%80%9A01.md)
 2. [mysql从入门到精通02](https://github.com/Jzedy/Z-books/blob/master/src/main/doc/sql/mysql%E5%85%A5%E9%97%A8%E5%88%B0%E7%B2%BE%E9%80%9A02.md)
