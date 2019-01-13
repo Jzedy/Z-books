@@ -5,7 +5,7 @@
 
 >码云地址：[https://gitee.com/baomidou/mybatis-plus](https://gitee.com/baomidou/mybatis-plus)
 
->githb地址：[https://github.com/baomidou/mybatis-plus](https://github.com/baomidou/mybatis-plus)
+>github地址：[https://github.com/baomidou/mybatis-plus](https://github.com/baomidou/mybatis-plus)
 ## 依赖
 
 ```
