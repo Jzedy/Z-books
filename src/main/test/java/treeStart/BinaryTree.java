@@ -177,5 +177,16 @@ public class BinaryTree implements Tree {
         return minNode;
     }
 
+    @Override
+    public int height() {
+        return height(root);
+    }
+
+    private int height(Node node){
+        if (node == null){
+            return 0;
+        }else return Math.max(height(node.getLeftChild()),height(node.getRightChild()))+1;
+    }
+
 
 }

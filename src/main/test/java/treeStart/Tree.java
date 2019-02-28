@@ -56,4 +56,6 @@ public interface Tree {
      * @return
      */
     Node findMin();
+
+    int height();
 }
