@@ -105,23 +105,28 @@ public class AVLTree<T extends Comparable<T>> {
                    parent.rightChild = newNode;
                }
 
-               fixAfterInsertion(newNode);
+               root =fixAfterInsertion(newNode,root);
            }
 
         }
         return true;
     }
 
-    private Node<T> fixAfterInsertion(Node<T> node) {
+    private Node<T> fixAfterInsertion(Node<T> node,Node<T> root) {
         Node<T> result = null;
         if (node.parent != null && node.parent.parent != null){
             Node<T> p = node.parent;
             Node<T> g = node.parent.parent;
+            boolean flag = false;
+            if (root == g) flag = true;
             if (height(g.leftChild) -height(g.rightChild) == 2){
                 if (p.leftChild == node){
                     result = llRotation(g);
                 }else{
                     result =lrRotation(g);
+                }
+                if (flag){
+                    root = result;
                 }
             }
             else if (height(g.rightChild)-height(g.leftChild) == 2){
@@ -130,9 +135,12 @@ public class AVLTree<T extends Comparable<T>> {
                 }else {
                     result = rrRotation(g);
                 }
+                if (flag){
+                    root = result;
+                }
             }
         }
-        return result;
+        return root;
     }
 
     private void inOrder(Node<T> current) {
@@ -173,6 +181,7 @@ public class AVLTree<T extends Comparable<T>> {
         avlTree.insert(1);
         avlTree.insert(2);
         avlTree.insert(3);
+        avlTree.insert(4);
         avlTree.inOrder();
         System.out.println();
         avlTree.preOrder();
