@@ -216,6 +216,6 @@ private Node<T> successor(Node<T> tree) {
 ```
 ## 参考
 [后继节点](https://github.com/Jzedy/Z-books/blob/master/src/main/doc/baseJava/dataStructure/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84-%E4%BA%8C%E5%8F%89%E6%90%9C%E7%B4%A2%E6%A0%91.md)参考
-[完整代码]()参考
+[完整代码](https://github.com/Jzedy/Z-books/blob/master/src/main/java/tree/avl/AVLTree.java)参考
 
 
