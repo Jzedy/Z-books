@@ -1,39 +1,35 @@
 package tree.avl;
 
 /**
- * @author zhangyin
- * @date 2019/3/1
+ * @author Jzedy
+ * @time 2019/3/2 16:21
+ * @description
  */
 public class AVLTree<T extends Comparable<T>> {
+
     private Node<T> root;
 
     class Node<T>{
         private T key;
-        private Node<T> leftChild;
-        private Node<T> rightChild;
-        private Node<T> parent;
+        private Node<T> left;
+        private Node<T> right;
 
-        public Node(T key, Node<T> parent) {
+
+        public Node(T key) {
             this.key = key;
-            this.parent = parent;
         }
     }
 
-    /**
-     * 获取树的高度
-     * @return
-     */
     public int height(){
         return height(root);
     }
 
     private int height(Node<T> tree) {
-        if (tree == null){
-            return 0;
-        }else return Math.max(height(tree.leftChild),height(tree.rightChild))+1;
+        if (tree == null) return 0;
+        else {
+            return Math.max(height(tree.left),height(tree.right))+1;
+        }
     }
-
-
 
     /**
      * 左左旋转
@@ -41,9 +37,9 @@ public class AVLTree<T extends Comparable<T>> {
      * @return
      */
     private Node<T> llRotation(Node<T> tree){
-        Node<T> lTree = tree.leftChild;
-        tree.leftChild = lTree.rightChild;
-        lTree.rightChild = tree;
+        Node<T> lTree = tree.left;
+        tree.left = lTree.right;
+        lTree.right = tree;
         return lTree;
     }
 
@@ -53,9 +49,9 @@ public class AVLTree<T extends Comparable<T>> {
      * @return
      */
     private Node<T> rrRotation(Node<T> tree){
-        Node<T> rTree = tree.rightChild;
-        tree.rightChild = rTree.leftChild;
-        rTree.leftChild = tree;
+        Node<T> rTree = tree.right;
+        tree.right = rTree.left;
+        rTree.left = tree;
         return rTree;
     }
 
@@ -65,126 +61,118 @@ public class AVLTree<T extends Comparable<T>> {
      * @return
      */
     private Node<T> lrRotation(Node<T> tree){
-        rrRotation(tree.leftChild);
+        rrRotation(tree.left);
         return llRotation(tree);
     }
 
     /**
-     * 右左旋转
+     * 右右旋转
      * @param tree
      * @return
      */
     private Node<T> rlRotation(Node<T> tree){
-        llRotation(tree.rightChild);
+        llRotation(tree.right);
         return rrRotation(tree);
     }
 
 
-    public boolean insert(T key){
-        Node<T> current = root;
-        if (current == null){
-            root = new Node<>(key,null);
+    public void add(T key){
+        if (root == null){
+            root = new Node<>(key);
         }else {
-            Node<T> parent;
-            int cmp;
-           do {
-               parent = current;
-               cmp = key.compareTo(current.key);
-               if (cmp < 0)current = current.leftChild;
-               else if (cmp > 0)current = current.rightChild;
-               else break;
-
-           }while (current != null);
-           if (cmp == 0){
-               return false;
-           }else {
-               Node<T> newNode = new Node<>(key,parent);
-               if (cmp < 0 ){
-                   parent.leftChild = newNode;
-               }else {
-                   parent.rightChild = newNode;
-               }
-
-               root =fixAfterInsertion(newNode,root);
-           }
-
+            add(root,key);
+            root = fixAfterOperation(root);
         }
-        return true;
     }
 
-    private Node<T> fixAfterInsertion(Node<T> node,Node<T> root) {
-        Node<T> result = null;
-        if (node.parent != null && node.parent.parent != null){
-            Node<T> p = node.parent;
-            Node<T> g = node.parent.parent;
-            boolean flag = false;
-            if (root == g) flag = true;
-            if (height(g.leftChild) -height(g.rightChild) == 2){
-                if (p.leftChild == node){
-                    result = llRotation(g);
-                }else{
-                    result =lrRotation(g);
+    private Node<T> fixAfterOperation(Node<T> tree) {
+        if (tree != null) {
+            if (height(tree.left) - height(tree.right) == 2) {
+                if (height(tree.left.left) > height(tree.left.right)) {
+                    tree = llRotation(tree);
+                } else {
+                    tree = lrRotation(tree);
                 }
-                if (flag){
-                    root = result;
+
+            }
+
+            if (height(tree.right) - height(tree.left) == 2) {
+                if (height(tree.right.left) > height(tree.right.right)) {
+                    tree = rlRotation(tree);
+                } else {
+                    tree =rrRotation(tree);
                 }
             }
-            else if (height(g.rightChild)-height(g.leftChild) == 2){
-                if (p.leftChild == node){
-                   result = rlRotation(g);
+        }
+        return tree;
+    }
+
+    private Node<T> add(Node<T> tree, T key) {
+        int tmp;
+        if (tree == null){
+            tree = new Node<>(key);
+        }else {
+            tmp = key.compareTo(tree.key);
+            if (tmp < 0){
+                tree.left = add(tree.left,key);
+            }else if (tmp > 0){
+                tree.right = add(tree.right,key);
+            }else {
+                return tree;
+            }
+        }
+        return tree;
+    }
+
+    public void remove(T key){
+        if (root != null && key != null){
+            remove(root,key);
+            root = fixAfterOperation(root);
+        }
+    }
+
+    private Node<T> remove(Node<T> tree, T key) {
+        if (tree == null || key == null) return tree;
+        int tmp = key.compareTo(tree.key);
+        if (tmp < 0){
+            tree.left = remove(tree.left,key);
+        }else if (tmp > 0){
+            tree.right = remove(tree.right,key);
+        }else {
+                Node<T> successor = successor(tree);
+                if (successor == null){//删除节点的右子树为空
+                    Node<T> l = tree.left;//查看左子树
+                    if (l == null){
+                        tree = null;
+                    }else {
+                        tree.key = l.key;
+                        tree.left = remove(tree.left,l.key);
+                    }
                 }else {
-                    result = rrRotation(g);
+                    tree.key = successor.key;
+                    tree.right = remove(tree.right,successor.key);
                 }
-                if (flag){
-                    root = result;
-                }
-            }
         }
-        return root;
+        return tree;
     }
 
-    private void inOrder(Node<T> current) {
-        if (current != null){
-            inOrder(current.leftChild);
-            System.out.print(current.key);
-            inOrder(current.rightChild);
+    private Node<T> successor(Node<T> tree) {
+        Node<T> result = tree.right;
+        while (result != null && result.left != null){
+            result = result.left;
         }
+        return result;
     }
-    public void inOrder(){
-        inOrder(root);
-    }
-
-    private void preOrder(Node current) {
-        if (current!= null){
-            System.out.print(current.key);
-            preOrder(current.leftChild);
-            preOrder(current.rightChild);
-        }
-    }
-
-    public void preOrder(){
-        preOrder(root);
-    }
-
-
-
 
     public static void main(String[] args) {
-        AVLTree<Integer> avlTree = new AVLTree<>();
-//        avlTree.insert(5);
-//        avlTree.insert(2);
-//        avlTree.insert(8);
-//        avlTree.insert(1);
-//        avlTree.insert(4);
-//        avlTree.insert(7);
-//        avlTree.insert(3);
-        avlTree.insert(1);
-        avlTree.insert(2);
-        avlTree.insert(3);
-        avlTree.insert(4);
-        avlTree.inOrder();
-        System.out.println();
-        avlTree.preOrder();
+        AVLTree<Integer> tree = new AVLTree<>();
+        tree.add(1);
+        tree.add(2);
+        tree.add(3);
+        tree.add(4);
+//        tree.add(5);
+        tree.remove(1);
         System.out.println();
     }
+
 }
