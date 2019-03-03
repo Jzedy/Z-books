@@ -18,3 +18,7 @@
 # MySQL
 1. [mysql从入门到精通01](https://github.com/Jzedy/selfwrite/blob/master/src/main/doc/sql/mysql%E5%85%A5%E9%97%A8%E5%88%B0%E7%B2%BE%E9%80%9A01.md)
 2. [mysql从入门到精通02](https://github.com/Jzedy/Z-books/blob/master/src/main/doc/sql/mysql%E5%85%A5%E9%97%A8%E5%88%B0%E7%B2%BE%E9%80%9A02.md)
+
+# 数据结构
+1. [二叉搜索树](https://github.com/Jzedy/Z-books/blob/master/src/main/doc/baseJava/dataStructure/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84-%E4%BA%8C%E5%8F%89%E6%90%9C%E7%B4%A2%E6%A0%91.md)
+2. [AVL(平衡二叉树)](https://github.com/Jzedy/Z-books/blob/master/src/main/doc/baseJava/dataStructure/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84-(AVL)%E5%B9%B3%E8%A1%A1%E4%BA%8C%E5%8F%89%E6%A0%91.md)
