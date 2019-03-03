@@ -23,7 +23,7 @@ public class AVLTree<T extends Comparable<T>>{
 
 
 
-##树的高度
+## 树的高度
 ```
 public int height(){
     return height(root);
