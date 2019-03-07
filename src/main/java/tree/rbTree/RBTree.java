@@ -1,7 +1,7 @@
 package tree.rbTree;
 
 /**
- * @author zhangyin
+ * @author Jzedy
  * @date 2019/3/5
  */
 public class RBTree<T extends Comparable<T>> {
@@ -131,11 +131,11 @@ public class RBTree<T extends Comparable<T>> {
         if (cmp < 0){
             parent.left = e;
         }else parent.right = e;
-        fixAfterOperation(e);
+        fixAfterAdd(e);
         return true;
     }
 
-    private void fixAfterOperation(Node<T> x) {
+    private void fixAfterAdd(Node<T> x) {
         x.color = RED;
         while (parentOf(x) != null && parentOf(x).color == RED){
            if (parentOf(x) == leftOf(parentOf(parentOf(x)))){//父节点是祖父节点的左子节点
@@ -174,6 +174,87 @@ public class RBTree<T extends Comparable<T>> {
         }
 
         setColor(root,BLACK);
+    }
+
+    public boolean remove(T key){
+        if (root == null){
+            return false;
+        }else {
+            Node<T> current = root;
+            int cmp;
+            do {
+                cmp = key.compareTo(current.key);
+                if (cmp < 0){
+                    current = current.left;
+                }else if (cmp > 0){
+                    current = current.right;
+                }else break;
+            }while (current != null);
+
+            if (current == null){//未找到对应的节点
+                return false;
+            }else {
+                if (leftOf(current) != null && rightOf(current) != null){//当前删除节点左/右子节点不为空
+                    Node<T> s = successor(current);//获取当前删除节点的后继节点
+                    current.key = s.key;//后继节点的值赋给当前删除节点
+                    current = s;//当前删除节点指向后继节点
+                }
+
+                /**
+                 * 若开始的删除节点左右子节点都不为空，现在的删除节点指向了后继节点
+                 * 若开始的删除节点左/右节点至少有一个为空，现在的删除节点未做改变
+                 * 下面的replace节点为当前删除节点的左子节点或右子节点
+                 */
+                Node<T> replace = leftOf(current) != null ? leftOf(current) : rightOf(current);
+
+                if (replace != null){
+                    replace.parent = current.parent;
+                    if (parentOf(current) == null){//删除节点是根节点，且根节点只有一个子节点
+                        root = replace;//将根节点指向原来根节点的那个子节点
+                    }else if (current == leftOf(parentOf(current))){//当前删除节点是父节点的左子节点
+                        current.parent.left = replace;
+                    }else {
+                        current.parent.right = replace;
+                    }
+
+                    current.left = current.right = current.parent = null;
+                    if (colorOf(current) == BLACK){
+                        fixAfterRemove(replace);
+                    }
+
+                }else if (current.parent == null){//删除节点为根节点 且没有子节点
+                    root = null;
+                }else {//删除节点没有子节点，但是不为根节点
+                    if (current.color == BLACK){
+                        fixAfterRemove(current);
+                    }
+
+                    if (current.parent != null){
+                        if ( current == parentOf(current).left){
+                            parentOf(current).left = null;
+                        }else {
+                            parentOf(current).right = null;
+                        }
+                        current.parent = null;
+                    }
+                }
+
+
+            }
+        }
+        return true;
+    }
+
+    private void fixAfterRemove(Node<T> node) {
+
+    }
+
+    private Node<T> successor(Node<T> node) {
+        Node<T> result = rightOf(node);
+        while (result != null && leftOf(result) != null){
+            result = leftOf(result);
+        }
+        return result;
     }
 
 
