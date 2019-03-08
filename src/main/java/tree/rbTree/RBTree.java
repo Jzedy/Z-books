@@ -135,6 +135,52 @@ public class RBTree<T extends Comparable<T>> {
         return true;
     }
 
+    /**
+     * 当前添加节点颜色设置为红色。
+     * 若父节点为空，表示当前添加节点为根节点，将根节点置为黑色就可以了
+     * 若父节点不为空，只有当父节点颜色为红色时候才调整结构
+     * 根据对称性，描述父节点为祖父节点的左子节点的情况，当父节点为祖父节点的右子节点时候，根据对称性，左旋/右旋相反操作即可
+     * 当父节点为祖父节点左子节点且父节点为红色时候，有如下几种情况：
+     * 1.叔叔节点也是红色
+     * 2.叔叔节点是黑色
+     *
+     * 先讨论叔叔节点是黑色时候，又有下面两种情况：
+     * 2.1 添加节点是父节点的左子节点
+     * 2.2 添加节点是父节点的右子节点
+     *
+     * 先看添加节点是父节点的左子节点：
+     * 2.1 让父节点颜色为红，祖父节点为黑 ，祖父节点右旋
+     *
+     *         gx(b)
+     *        /   \           x为添加节点    px(b)
+     *     px(r)  uncle(b)       ==>         /   \
+     *    /                             x(r)   gx(r)
+     * x(r)                                    \
+     *                                        uncle(b)
+     *
+     * 2.2 当添加节点是父节点的右子节点：
+     *
+     *     gx(b)                                gx(b)
+     *    /   \              x为添加节点       /  \
+     * px(r)  uncle(b)          ==>         x(r)   uncle(b)
+     *   \                                 /
+     *   x(r)                            px(r)
+     *
+     *  此时将px看作是新添加的节点就和上面叔叔节点是黑色，添加节点是父节点的左子节点情况，即2.1
+     *
+     *  当叔叔节点是红色时候
+     *  父节点和叔叔节点变为黑色，祖父节点变为红色
+     *           gpx(?)                              gpx(?)
+     *            /                                   /
+     *         gx(b)                              gx(r)
+     *        /   \              x为添加节点     /   \
+     *     px(r)  uncle(r)          ==>       px(b)  uncle(b)
+     *    /                                  /
+     *  x(r)                               x(r)
+     *
+     *对于1 即叔叔节点是红色时候 经过上面调整后，gpx(祖父节点的父节点)如果颜色为红色，此时还要调整，将祖父节点作为新添加节点继续处理
+     * @param x
+     */
     private void fixAfterAdd(Node<T> x) {
         x.color = RED;
         while (parentOf(x) != null && parentOf(x).color == RED){
@@ -245,8 +291,75 @@ public class RBTree<T extends Comparable<T>> {
         return true;
     }
 
+    /**
+     * 删除时候
+     * 1. 当前节点为父节点的左子节点
+     *
+     * 1.1 若兄弟节点为红色
+     *
+     *
+     *    px(?)
+     *   /  \
+     * x(b) sib(r)
+     *
+     * @param node
+     */
     private void fixAfterRemove(Node<T> node) {
+        while (node != root && colorOf(node) == BLACK){
+            if (node == leftOf(parentOf(node))){//node为其父节点的左子节点
+                Node<T> b = rightOf(parentOf(node));//获取node兄弟节点
+                if (colorOf(b) == RED){//若兄弟节点为红色
+                    setColor(b,BLACK);
+                    setColor(parentOf(node),RED);
+                    leftRotation(parentOf(node));
+                    b = rightOf(parentOf(node));
+                }
 
+                if (colorOf(leftOf(b)) == BLACK && colorOf(rightOf(b)) == BLACK){
+                    setColor(b,RED);
+                    node = parentOf(node);
+                }else {
+                    if (colorOf(rightOf(node)) == BLACK){
+                        setColor(leftOf(b),BLACK);
+                        setColor(b,RED);
+                        rightRotation(b);
+                        b = rightOf(parentOf(node));
+                    }
+                    setColor(b,colorOf(parentOf(node)));
+                    setColor(parentOf(node),BLACK);
+                    setColor(rightOf(b),BLACK);
+                    leftRotation(parentOf(node));
+                    node = root;
+                }
+
+            }else {
+                Node<T> b = leftOf(parentOf(node));
+                if (colorOf(b) == RED){//若兄弟节点为红色
+                    setColor(b,BLACK);
+                    setColor(parentOf(node),RED);
+                    rightRotation(parentOf(node));
+                    b = leftOf(parentOf(node));
+                }
+
+                if (colorOf(leftOf(b)) == BLACK && colorOf(rightOf(b)) == BLACK){
+                    setColor(b,RED);
+                    node = parentOf(node);
+                }else {
+                    if (colorOf(rightOf(node)) == BLACK){
+                        setColor(leftOf(b),BLACK);
+                        setColor(b,RED);
+                        leftRotation(b);
+                        b = leftOf(parentOf(node));
+                    }
+                    setColor(b,colorOf(parentOf(node)));
+                    setColor(parentOf(node),BLACK);
+                    setColor(rightOf(b),BLACK);
+                    rightRotation(parentOf(node));
+                    node = root;
+                }
+            }
+        }
+        setColor(node,BLACK);
     }
 
     private Node<T> successor(Node<T> node) {
