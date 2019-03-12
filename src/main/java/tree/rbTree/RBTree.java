@@ -292,16 +292,48 @@ public class RBTree<T extends Comparable<T>> {
     }
 
     /**
-     * 删除时候
-     * 1. 当前节点为父节点的左子节点
+     * 删除结束调整
      *
-     * 1.1 若兄弟节点为红色
+     * 1.若当前节点颜色为红+黑色，当前节点颜色置为黑色
+     *
+     * 2. 当前节点颜色为黑+黑色
+     * 2.1 当前节点为父节点的左子节点
      *
      *
-     *    px(?)
-     *   /  \
-     * x(b) sib(r)
      *
+     * 2.1.1 若兄弟节点为红色，
+     *                                     sib(b)
+     *                                    /    \
+     *    px(b)                        px(r)   sibR(b)
+     *   /  \           ==>           /   \                  --->此时变为兄弟节点变为黑色，后续情况讨论
+     * x(b+b) sib(r)              x(b+b)  sibL(b)
+     *     /    \
+     *  sibL(b)  sibR(b)
+     *
+     * 2.1.2 若兄弟节点为黑色
+     *   -1 兄弟节点的左右子节点也为黑色
+     *
+     *      px(b)              px(b+b)
+     *     /   \        ==>    /   \                  --->此时将黑+黑节点转移到原来的父节点
+     * x(b+b)  sib(b)        x(b)   sib(r)
+     *         /   \               /    \
+     *     lsib(b) rsib(b)     lsib(r)  rsib(b)
+     *
+     *   -2 兄弟节点的的右子节点为黑色,左子节点为红色
+     *
+     *     px(b)                             px(b)
+     *     /   \                             /   \
+     * x(b+b)  sib(b)              ==>   x(b+b)  lsib(b)        --->此时变为兄弟节点为黑色，兄弟节点的右子节点为红色
+     *         /   \                              \
+     *      lsib(r) lsib(b)                      sib(r)
+     *                                             \
+     *                                            lsib(b)
+     *    -3  兄弟节点的右子节点为红色
+     *    px(b)                          sib(b)
+     *    /   \                         /    \
+     * x(b+b) sib(b)            ==>  px(b)   rsib(b)
+     *        /   \                  /  \
+     *    lsib(?)  rsib(r)         x(b) lsib(?)
      * @param node
      */
     private void fixAfterRemove(Node<T> node) {
