@@ -408,6 +408,7 @@ public class RBTree<T extends Comparable<T>> {
         tree.add(1);
         tree.add(2);
         tree.add(3);
+        tree.remove(2);
         System.out.println();
     }
 }
