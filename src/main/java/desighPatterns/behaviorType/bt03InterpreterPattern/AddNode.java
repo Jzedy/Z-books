@@ -1,0 +1,17 @@
+package desighPatterns.behaviorType.bt03InterpreterPattern;
+
+/**
+ * @author Jzedy
+ * @time 19-5-6
+ * @description
+ */
+public class AddNode extends NonTerminalNode {
+    public AddNode(Node left, Node right) {
+        super(left, right);
+    }
+
+    @Override
+    public int interpret() {
+        return left.interpret() + right.interpret();
+    }
+}
