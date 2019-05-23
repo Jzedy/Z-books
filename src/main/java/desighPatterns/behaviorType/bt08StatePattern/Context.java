@@ -1,6 +1,6 @@
-package desighPatterns.behaviorType.bto8StatePattern;
+package desighPatterns.behaviorType.bt08StatePattern;
 
-import desighPatterns.behaviorType.bto8StatePattern.impl.*;
+import desighPatterns.behaviorType.bt08StatePattern.impl.*;
 
 /**
  * @author Jzedy

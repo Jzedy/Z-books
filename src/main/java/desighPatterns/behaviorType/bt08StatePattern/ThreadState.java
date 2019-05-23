@@ -1,4 +1,4 @@
-package desighPatterns.behaviorType.bto8StatePattern;
+package desighPatterns.behaviorType.bt08StatePattern;
 
 /**
  * @author Jzedy
